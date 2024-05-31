@@ -35,6 +35,10 @@ app.post("/form", async (req, res) => {
   } catch (error) {}
 });
 
+app.get("*", (req, res) => {
+  res.status(400).json({ message: " t'es perdu" });
+});
+
 app.listen(process.env.port, () => {
   console.log("server started");
 });
