@@ -35,7 +35,7 @@ app.post("/form", async (req, res) => {
   } catch (error) {}
 });
 
-app.get("*", (req, res) => {
+app.all("*", (req, res) => {
   res.status(400).json({ message: " t'es perdu" });
 });
 
