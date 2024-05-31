@@ -11,7 +11,7 @@ app.use(cors());
 const mailgun = new Mailgun(formData);
 const client = mailgun.client({
   username: "taker",
-  key: "4b078c8eda96d9137888fe2cb99e8169-0996409b-2097f8ef",
+  key: process.env.key,
 });
 app.post("/form", async (req, res) => {
   try {
@@ -23,10 +23,7 @@ app.post("/form", async (req, res) => {
       text: req.body.message,
     };
     const response = await client.messages
-      .create(
-        "sandboxbcf18311306b4e12ae795a3b29d90202.mailgun.org",
-        messageData
-      )
+      .create(process.env.domain, messageData)
       .then((res) => {
         console.log(res);
       })
@@ -38,6 +35,6 @@ app.post("/form", async (req, res) => {
   } catch (error) {}
 });
 
-app.listen(3000, () => {
+app.listen(process.env.port, () => {
   console.log("server started");
 });
